@@ -1,7 +1,7 @@
 import pickle
 import joblib
 # pickle 파일 경로 설정
-pickle_file_path = 'C:\_data\project\pickle\\1.pkl'
+pickle_file_path = 'C:\_data\project\pickle\\0425_test\\hypeboy.pkl'
 
 # pickle 파일 열기
 # with open(pickle_file_path, 'rb') as f:
@@ -14,10 +14,12 @@ pickle_file_path = 'C:\_data\project\pickle\\1.pkl'
 loaded_data = joblib.load(pickle_file_path)
 
 
-print(loaded_data[2].keys())
+print(loaded_data.keys())
+# print(loaded_data[2]['pose'].shape)
 
 # print(edge.keys())
 # print(edge['smpl_poses'].shape) #(900, 72)  (2325, 72)          #   (4650, 72)
 # print(edge['smpl_trans'].shape) #(900, 3)  (2325, 3)          #     (4650, 3)
 # print(edge['full_pose'].shape) #(900, 24, 3)   (2325, 24, 3)  #     (4650, 24, 3)
-# print(edge['body_pose'].shape)    
+# print(edge['body_pose'].shape)
+
