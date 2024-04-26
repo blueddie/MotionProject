@@ -25,8 +25,9 @@ pickle_file_path = 'C:\_data\project\pickle\\jun123.pkl'
 # edge = loaded_data
 
 loaded_data = joblib.load(pickle_file_path)
-print(loaded_data.keys())
 # print(loaded_data.keys())
+print(loaded_data[0].keys())
+print(loaded_data[408]['frame_ids'])
 # # print(loaded_data.keys)
 # print(loaded_data[0].keys())
 # print(loaded_data[0]['keypoints'])
