@@ -2,7 +2,8 @@ import pickle
 import joblib
 import numpy as np
 # pickle 파일 경로 설정
-pickle_file_path = 'C:\_data\project\pickle\\0425_test\\bo.pkl'
+# pickle_file_path = 'C:\_data\project\pickle\\0425_test\\bo.pkl'
+pickle_file_path = 'C:\practiceField\\test_o8RkbHv2_a0.pkl'
 
 # pickle 파일 열기
 # with open(pickle_file_path, 'rb') as f:
@@ -16,7 +17,7 @@ loaded_data = joblib.load(pickle_file_path)
 
 
 print(loaded_data.keys())
-# print(loaded_data[320]['smpl_pose'])
+print(loaded_data['smpl_poses'].shape)
 
 
 
@@ -26,12 +27,12 @@ print(loaded_data.keys())
 
 
 
-result = 0
+# result = 0
 
-for key in loaded_data.keys():
+# for key in loaded_data.keys():
     
-    print(loaded_data[key]['smpl_pose'].shape[0])
-    result = result + loaded_data[key]['smpl_pose'].shape[0]
+#     print(loaded_data[key]['smpl_pose'].shape[0])
+#     result = result + loaded_data[key]['smpl_pose'].shape[0]
 
-print("최종 결과 : ",result)
+# print("최종 결과 : ",result)
 
