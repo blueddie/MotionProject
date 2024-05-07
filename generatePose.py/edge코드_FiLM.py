@@ -5,8 +5,9 @@ class DenseFiLM(nn.Module):
     # FiLM은 신경망에서 주로 조건부 학습을 위해 사용되는 기법 중 하나.
     # FiLM은 입력 특성들에 대해 각각 선형 변환을 독립적으로 적용하여 신경망의 특정 층의 출력을 조절
     # 이를 통해 신경망이 주어진 조건에 따라 다르게 반응하도록 만들 수 있음.
-
-
+    # 다중 모달 학습: 서로 다른 유형의 입력(예: 텍스트와 이미지)을 처리할 때,
+    # FiLM은 하나의 모달(예: 텍스트)로부터 추출된 정보를 사용하여 다른 모달(예: 이미지 처리 신경망)의 처리 과정을 조절할 수 있습니다.
+    # 조건부 이미지 생성: 특정 설명이나 속성에 기반하여 이미지를 생성할 때 FiLM은 생성 모델이 입력된 조건에 따라 적절한 이미지를 생성하도록 도와줍니다.
 
 
     def __init__(self, embed_channels):
@@ -21,7 +22,7 @@ class DenseFiLM(nn.Module):
         pos_encoding = rearrange(pos_encoding, "b c -> b 1 c")  # 결과 텐서의 차원을 재배열합니다. 채널 차원을 확장하여 3D 텐서로 만듭니다.
         scale_shift = pos_encoding.chunk(2, dim=-1)  # 재배열된 텐서를 채널 차원을 따라 2개로 나누어 스케일과 시프트를 생성합니다.
         return scale_shift  # 스케일과 시프트의 튜플을 반환합니다.
-
+    # DenseFiLM의 forward 메소드는 위치 벡터 또는 임베딩을 입력으로 받고, 스케일과 시프트 파라미터로 구성된 튜플을 출력합니다.
 def featurewise_affine(x, scale_shift):
     scale, shift = scale_shift          # 입력된 scale_shift 튜플에서 스케일(scale)과 시프트(shift) 값을 추출합니다.
     return (scale + 1) * x + shift      # 입력 텐서 x의 각 요소에 스케일을 적용하고 시프트를 더합니다.
@@ -30,5 +31,5 @@ def featurewise_affine(x, scale_shift):
     # 예를 들어, 스케일이 0일 경우에도 원본 입력 x의 영향을 받습니다
     # 이 함수는 주로 신경망 내에서 다양한 조건에 따라 입력 텐서의 각 특성을 동적으로 조절할 때 사용됩니다.
     # 이러한 기능은 이미지 스타일 전환, 조건부 이미지 생성, 음성 인식 등의 응용에서 매우 유용하게 사용됩니다.
-
+    # featurewise_affine 함수는 데이터 텐서와 스케일/시프트 파라미터를 입력으로 받고, 변조된 데이터 텐서를 출력합니다.
 
