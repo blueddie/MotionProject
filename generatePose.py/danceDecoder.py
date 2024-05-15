@@ -32,6 +32,7 @@ class DanceDecoder(nn.Module):
 
         # time embedding processing     # 이 코드 부분은 시간 임베딩 처리를 위한 멀티 레이어 퍼셉트론(MLP)을 초기화
         self.time_mlp = nn.Sequential(  # 사인 및 코사인 함수를 사용하여 위치 정보를 인코딩하는 SinusoidalPosEmb 클래스의 인스턴스를 생성
+            
             SinusoidalPosEmb(latent_dim),  # learned?
             nn.Linear(latent_dim, latent_dim * 4),
             nn.Mish(),  # ReLU와 비슷하지만 부드러운 곡선을 가지고 있어 기울기 소실 문제를 덜 겪으며, 더 나은 학습 성능을 보임
@@ -64,7 +65,7 @@ class DanceDecoder(nn.Module):
         for _ in range(2):
             self.cond_encoder.append(  # TransformerEncoderLayer 인스턴스를 cond_encoder에 추가
                 TransformerEncoderLayer(
-                    d_model=latent_dim,  # 모델의 특징 차원을 설정
+                    d_model=latent_dim,  # 모델의 특징 차원을 설정 latent_dim 중요
                     nhead=num_heads,
                     dim_feedforward=ff_size,  # 피드포워드 네트워크의 차원
                     dropout=dropout,
